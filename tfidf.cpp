@@ -1,14 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include <utility>
-#include <algorithm>
-#include <vector>
-#include <map>
 #include <set>
-#include <cmath>
-#include <cstddef>
 #include <Eigen/Dense>
-#include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
 #include <sstream>
 
