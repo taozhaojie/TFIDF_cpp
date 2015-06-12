@@ -97,7 +97,7 @@ public:
 		createVocabList();
 		vec2mat();
 		
-		Eigen::MatrixXf dataMat2 = dataMat;
+		Eigen::MatrixXf dataMat2(dataMat);
 		Eigen::VectorXf termCount;
 		termCount.resize(ncol);
 		for (int i = 0; i != nrow; ++i)
