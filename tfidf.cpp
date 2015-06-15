@@ -8,7 +8,6 @@
 using namespace std;
 
 class tfidf {
-
 private:
 	Eigen::MatrixXf dataMat;
 	int nrow; // matrix row number
