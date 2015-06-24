@@ -157,7 +157,7 @@ public:
 			vec_str.clear();
 		}
 
-		std::ifstream in2("song_with_tag.csv");
+		std::ifstream in2("song_hot_num.csv");
 		while (!in2.eof()) 
 		{
 			getline(in2, tmp, '\n');
