@@ -10,6 +10,10 @@ Use TF-IDF in music lyric similarity calculation.
 
 * Both single thread and multi thread versions.
 * Compile with g++ for single thread version
-`g++ -std=c++0x -Wall -o lyricSimilarity lyricSimilarity.cpp -static-libstdc++`
+```
+g++ -std=c++0x -Wall -o lyricSimilarity lyricSimilarity.cpp -static-libstdc++
+```
 * Compile the multithreading version
-`g++ -std=c++0x -Wall -o lyricSimilarity_multithreading lyricSimilarity_multithreading.cpp -static-libstdc++ -lpthread`
+```
+g++ -std=c++0x -Wall -o lyricSimilarity_multithreading lyricSimilarity_multithreading.cpp -static-libstdc++ -lpthread
+```
