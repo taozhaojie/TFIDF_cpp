@@ -2,10 +2,12 @@
 An Implementation of TF-IDF in C++
 
 * Needs to modify the function `loadData()` to fit the real situation.
-* The output is an `Eigen::MatrixXf` object.
+* Two versions of outputs
+ - `Eigen::MatrixXf` object.
+ - `std::vector<std::vector<double>>` object.
 
 
-## lyric_similarity
+## /lyric_similarity
 Use TF-IDF in music lyric similarity calculation.
 
 * Both single thread and multi thread versions.
