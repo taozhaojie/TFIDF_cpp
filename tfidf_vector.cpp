@@ -5,7 +5,6 @@
 #include <sstream>
 
 using namespace std;
-
 class tfidf {
 private:
 	std::vector<std::vector<double>> dataMat; // converted bag of words matrix
