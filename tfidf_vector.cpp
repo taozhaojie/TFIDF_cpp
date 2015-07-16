@@ -15,33 +15,19 @@ private:
 	std::vector<std::string> vocabList; // all terms
 	std::vector<int> numOfTerms; // used in tf calculation
 	
-	void loadData();
-	inline std::string readFileText(std::string & filename);
 	void createVocabList();
 	inline std::vector<double> bagOfWords2VecMN(std::vector<std::string> & inputSet);
 	void vec2mat();
-	inline std::vector<std::string> textParse(std::string & bigString);
 	inline std::vector<double> vec_sum(const std::vector<double>& a, const std::vector<double>& b);
 	void calMat();
 
 public:
 	std::vector<std::vector<double>> weightMat; // TF-IDF weighting matrix
-	tfidf(void);
+	tfidf(std::vector<std::vector<std::string>> & input):rawDataSet(input)
+	{
+		calMat();
+	}
 };
-
-tfidf::tfidf(void)
-{
-	loadData();
-	calMat();
-}
-
-inline std::string tfidf::readFileText(std::string & filename)
-{
-	std::ifstream in(filename);
-	std::string str((std::istreambuf_iterator<char>(in)),
-		            std::istreambuf_iterator<char>());
-	return str;
-}
 
 void tfidf::createVocabList()
 {
@@ -87,17 +73,6 @@ void tfidf::vec2mat()
 	rawDataSet.clear(); // release memory
 }
 
-inline std::vector<std::string> tfidf::textParse(std::string & bigString)
-{
-	std::vector<std::string> vec;
-	boost::tokenizer<> tok(bigString);
-	for(boost::tokenizer<>::iterator beg = tok.begin(); beg != tok.end(); ++ beg)
-	{
-	    vec.push_back(*beg);
-	}
-	return vec;
-}
-
 inline std::vector<double> tfidf::vec_sum(const std::vector<double>& a, const std::vector<double>& b)
 {
     assert(a.size() == b.size());
@@ -106,19 +81,6 @@ inline std::vector<double> tfidf::vec_sum(const std::vector<double>& a, const st
     std::transform(a.begin(), a.end(), b.begin(), 
                    std::back_inserter(result), std::plus<double>());
     return result;
-}
-
-void tfidf::loadData()
-{
-	for (int i = 1; i != 26; ++i)
-	{
-		std::ostringstream ss;
-		ss << "test/" << i << ".txt";
-		std::string filename = ss.str();
-		std::string str = readFileText(filename);
-		std::vector<std::string> wordList = textParse(str);
-		rawDataSet.push_back(wordList);
-	}
 }
 
 void tfidf::calMat()
@@ -159,8 +121,46 @@ void tfidf::calMat()
 	ncol = weightMat[0].size();
 }
 
+namespace file_related
+{
+	std::string readFileText(std::string & filename)
+	{
+		std::ifstream in(filename);
+		std::string str((std::istreambuf_iterator<char>(in)),
+			            std::istreambuf_iterator<char>());
+		return str;
+	}
+
+	std::vector<std::string> textParse(std::string & bigString)
+	{
+		std::vector<std::string> vec;
+		boost::tokenizer<> tok(bigString);
+		for(boost::tokenizer<>::iterator beg = tok.begin(); beg != tok.end(); ++ beg)
+		{
+		    vec.push_back(*beg);
+		}
+		return vec;
+	}
+}
+
+std::vector<std::vector<std::string>> loadData()
+{
+	std::vector<std::vector<std::string>>  data;
+	for (int i = 1; i != 26; ++i)
+	{
+		std::ostringstream ss;
+		ss << "test/" << i << ".txt";
+		std::string filename = ss.str();
+		std::string str = file_related::readFileText(filename);
+		std::vector<std::string> wordList = file_related::textParse(str);
+		data.push_back(wordList);
+	}
+	return data;
+}
+
 int main()
 {
-	tfidf ins;
+	std::vector<std::vector<std::string>> inputData = loadData();
+	tfidf ins(inputData);
 	std::vector<std::vector<double>> mat = ins.weightMat;
 }
