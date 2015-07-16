@@ -56,7 +56,6 @@ inline std::vector<double> tfidf::bagOfWords2VecMN(std::vector<std::string> & in
 
 void tfidf::vec2mat()
 {
-	cout << "Converting text to vector..." << endl;
 	int cnt(0);
 	for (auto it = rawDataSet.begin(); it != rawDataSet.end(); ++ it)
 	{
@@ -106,8 +105,6 @@ void tfidf::calMat()
 	std::vector<double> row_vec;
 	for (unsigned int i = 0; i != nrow; ++i)
 	{
-		cout << "\r" << (i + 1);
-		std::cout.flush();
 		for (unsigned int j = 0; j != ncol; ++j)
 		{
 			double tf = dataMat[i][j] / numOfTerms[i];
