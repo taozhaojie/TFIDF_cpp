@@ -16,7 +16,7 @@ private:
 	std::vector<int> numOfTerms; // used in tf calculation
 	
 	void createVocabList();
-	inline std::vector<double> bagOfWords2VecMN(std::vector<std::string> & inputSet);
+	inline std::vector<double> bagOfWords2VecMN(const std::vector<std::string> & inputSet);
 	void vec2mat();
 	inline std::vector<double> vec_sum(const std::vector<double>& a, const std::vector<double>& b);
 	void calMat();
@@ -40,7 +40,7 @@ void tfidf::createVocabList()
 	std::copy(vocabListSet.begin(), vocabListSet.end(), std::back_inserter(vocabList));
 }
 
-inline std::vector<double> tfidf::bagOfWords2VecMN(std::vector<std::string> & inputSet)
+inline std::vector<double> tfidf::bagOfWords2VecMN(const std::vector<std::string> & inputSet)
 {
 	std::vector<double> returnVec(vocabList.size(), 0);
 	for (std::string word : inputSet)
@@ -120,7 +120,7 @@ void tfidf::calMat()
 
 namespace file_related
 {
-	std::string readFileText(std::string & filename)
+	std::string readFileText(const std::string & filename)
 	{
 		std::ifstream in(filename);
 		std::string str((std::istreambuf_iterator<char>(in)),
@@ -128,7 +128,7 @@ namespace file_related
 		return str;
 	}
 
-	std::vector<std::string> textParse(std::string & bigString)
+	std::vector<std::string> textParse(const std::string & bigString)
 	{
 		std::vector<std::string> vec;
 		boost::tokenizer<> tok(bigString);
