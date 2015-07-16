@@ -1,7 +1,7 @@
 # TFIDF_cpp
 An Implementation of TF-IDF in C++
 
-* Needs to modify the function `loadData()` to fit the real situation.
+* Need to modify the function `loadData()` to fit the real situation.
 * Two versions of outputs
  - `Eigen::MatrixXf` object.
  - `std::vector<std::vector<double>>` object.
